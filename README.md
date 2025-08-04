@@ -1,4 +1,4 @@
-# TWRP device tree for Infinix Note 10 Pro ID (X695C,X695D,X695)
+# PBRP device tree for Infinix Note 10 Pro ID (X695C,X695D,X695)
 
 ## Status
 
@@ -44,7 +44,7 @@ Current state of features (from [here](https://twrp.me/faq/OfficialMaintainer.ht
 
 ```bash
 source build/envsetup.sh
-lunch twrp_x695c-eng
+lunch omni_x695c-eng
 mka bootimage
 ```
 

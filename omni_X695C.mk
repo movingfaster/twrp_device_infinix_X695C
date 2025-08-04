@@ -20,13 +20,15 @@
 $(call inherit-product, device/infinix/X695C/device.mk)
 
 # Inherit some common TWRP stuff.
-$(call inherit-product, vendor/twrp/config/common.mk)
+$(call inherit-product, vendor/pb/config/common.mk)
 
 # Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := X695C
-PRODUCT_NAME := twrp_X695C
+BOARD_VENDOR := Infinix
 PRODUCT_BRAND := Infinix
-PRODUCT_MODEL := Infinix X695C
+PRODUCT_DEVICE := X695C
+PRODUCT_NAME := omni_X695C
 PRODUCT_MANUFACTURER := INFINIX MOBILITY LIMITED
+PRODUCT_MODEL := Infinix X695C
+TARGET_VENDOR := infinix
 
 PRODUCT_GMS_CLIENTID_BASE := android-transsion

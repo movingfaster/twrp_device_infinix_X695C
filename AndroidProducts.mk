@@ -17,4 +17,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-     $(LOCAL_DIR)/twrp_X695C.mk
+     $(LOCAL_DIR)/omni_X695C.mk
