@@ -1,10 +1,6 @@
 import /init.microtrust.rc
 
 on init
-    # Mount Metadata early
-    mkdir /metadata 0771 system system
-    mount ext4 /dev/block/bootdevice/by-name/metadata /metadata
-
     # Create a more standard /dev/block layout for our scripts
     symlink /dev/block/platform/bootdevice /dev/block/bootdevice
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
@@ -112,9 +108,6 @@ service mtk.plpath.utils /system/bin/mtk_plpath_utils
 on property:hwservicemanager.ready=true
     start keymaster-4-0
     start gatekeeper-1-0
-    mount /data
-    mkdir /sdcard 0771 media_rw media_rw
-    symlink /data/media/0 /sdcard
 
 on property:crypto.ready=1
     start keymaster-4-0
