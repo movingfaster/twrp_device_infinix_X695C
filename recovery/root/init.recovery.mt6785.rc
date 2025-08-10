@@ -9,6 +9,13 @@ on init
     setprop sys.usb.configfs 1
     setprop sys.usb.ffs.aio_compat 0
 
+on post-fs-data
+    mkdir /data/media 0770 media_rw media_rw
+    mkdir /data/media/0 0770 media_rw media_rw
+    symlink /data/media/0 /sdcard
+
+on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
+
 on fs
     # Mount persist partition
     mkdir /mnt/vendor/persist 0771 root root
@@ -105,6 +112,10 @@ service mtk.plpath.utils /system/bin/mtk_plpath_utils
     disabled
     seclabel u:r:recovery:s0
 
+on property:vendor.sys.listener.registered=true
+    start gatekeeper-1-0
+    start keymaster-4-0
+
 on property:hwservicemanager.ready=true
     start keymaster-4-0
     start gatekeeper-1-0
@@ -112,25 +123,14 @@ on property:hwservicemanager.ready=true
 on property:crypto.ready=1
     start keymaster-4-0
 
-on property:vendor.sys.listener.registered=true
-    start gatekeeper-1-0
-    start keymaster-4-0
-
-on property:ro.crypto.state=unsupported
+on property:ro.crypto.state=unsupported && on property:ro.crypto.state=unencrypted
     stop teei_daemon
     stop keymaster-4-0
     stop gatekeeper-1-0
     stop servicemanager
     stop hwservicemanager
 
-on property:ro.crypto.state=unencrypted
-    stop teei_daemon
-    stop keymaster-4-0
-    stop gatekeeper-1-0
-    stop servicemanager
-    stop hwservicemanager
-
-on property:twrp.decrypt.done=true
+on property:twrp.all.users.decrypted=true && on property:twrp.decrypt.done=true
     stop teei_daemon
     stop keymaster-4-0
     stop gatekeeper-1-0
