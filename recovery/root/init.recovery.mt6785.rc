@@ -14,8 +14,6 @@ on post-fs-data
     mkdir /data/media/0 0770 media_rw media_rw
     symlink /data/media/0 /sdcard
 
-on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
-
 on fs
     # Mount persist partition
     mkdir /mnt/vendor/persist 0771 root root
@@ -121,16 +119,36 @@ on property:hwservicemanager.ready=true
     start gatekeeper-1-0
 
 on property:crypto.ready=1
+    mount f2fs /dev/block/mapper/data /data
     start keymaster-4-0
+    start gatekeeper-1-0
 
-on property:ro.crypto.state=unsupported && on property:ro.crypto.state=unencrypted
+on property:vold.decrypt=trigger_restart_framework
+    start keymaster-4-0
+    start gatekeeper-1-0
+
+on property:ro.crypto.state=unsupported
     stop teei_daemon
     stop keymaster-4-0
     stop gatekeeper-1-0
     stop servicemanager
     stop hwservicemanager
 
-on property:twrp.all.users.decrypted=true && on property:twrp.decrypt.done=true
+on property:ro.crypto.state=unencrypted
+    stop teei_daemon
+    stop keymaster-4-0
+    stop gatekeeper-1-0
+    stop servicemanager
+    stop hwservicemanager
+
+on property:twrp.all.users.decrypted=true
+    stop teei_daemon
+    stop keymaster-4-0
+    stop gatekeeper-1-0
+    stop servicemanager
+    stop hwservicemanager
+
+on property:twrp.decrypt.done=true
     stop teei_daemon
     stop keymaster-4-0
     stop gatekeeper-1-0
@@ -140,3 +158,5 @@ on property:twrp.all.users.decrypted=true && on property:twrp.decrypt.done=true
 on boot
     start boot-hal-1-1
     start health-hal-2-1
+
+    setprop sys.usb.config mass_storage,adb
