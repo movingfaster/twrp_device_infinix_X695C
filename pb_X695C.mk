@@ -26,7 +26,7 @@ $(call inherit-product, vendor/pb/config/common.mk)
 BOARD_VENDOR := Infinix
 PRODUCT_BRAND := Infinix
 PRODUCT_DEVICE := X695C
-PRODUCT_NAME := omni_X695C
+PRODUCT_NAME := pb_X695C
 PRODUCT_MANUFACTURER := INFINIX MOBILITY LIMITED
 PRODUCT_MODEL := Infinix X695C
 TARGET_VENDOR := infinix
