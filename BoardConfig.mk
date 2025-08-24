@@ -146,7 +146,7 @@ TARGET_USERIMAGES_USE_F2FS := true
 TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_CRYPTO_FBE := true
 TW_INCLUDE_FBE_METADATA_DECRYPT := true
-TW_USE_FSCRYPT_POLICY := 2
+#TW_USE_FSCRYPT_POLICY := 2 # reduce
 TW_PREPARE_DATA_MEDIA_EARLY := true
 
 # Security Patch & Build Info
@@ -163,6 +163,8 @@ TW_CUSTOM_CLOCK_POS := "70"
 TW_CUSTOM_BATTERY_POS := "790"
 TW_THEME := portrait_hdpi
 TW_DEFAULT_LANGUAGE := en
+TW_EXTRA_LANGUAGES := false # reduce
+TW_OEM_BUILD := true # Use default theme
 TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TW_DEFAULT_BRIGHTNESS := 1200
 TW_MAX_BRIGHTNESS := 2460
@@ -176,6 +178,8 @@ TW_EXCLUDE_APEX := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_EXCLUDE_TWRPAPP := true
 TW_EXCLUDE_LPDUMB := true
+TW_EXCLUDE_SUPERSU := true # reduce
+TW_EXCLUDE_PYTHON := true # reduce
 
 # Storage
 TW_HAS_MTP := true
@@ -188,7 +192,7 @@ TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.usb0/lun.%d/file
 
 # Debug
-TWRP_INCLUDE_LOGCAT := true
+TWRP_INCLUDE_LOGCAT := false # reduce
 TARGET_USES_LOGD := true
 
 # Display / Touch
@@ -197,10 +201,10 @@ TARGET_DISABLE_TRIPLE_BUFFERING := false
 TARGET_SCREEN_HEIGHT := 2460
 
 # FS & Tools
-TW_INCLUDE_NTFS_3G := true
+TW_INCLUDE_NTFS_3G := false # reduce
 TW_INCLUDE_REPACKTOOLS := true
 TW_INCLUDE_RESETPROP := true
-TW_INCLUDE_LPTOOLS := true
+TW_INCLUDE_LPTOOLS := false # reduce
 
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_Infinix-X695C
