@@ -137,6 +137,9 @@ on property:twrp.decrypt.done=true
     stop servicemanager
     stop hwservicemanager
 
+on property:ro.twrp.boot=1
+    stop teei_daemon
+
 on boot
     start boot-hal-1-1
     start health-hal-2-1
@@ -145,3 +148,5 @@ on boot
 on post-fs-data
     rm /cache/recovery/command
     rm /cache/recovery/log
+    rm -rf /cache/recovery/*
+    rm /data/twrp.log
